@@ -42,6 +42,4 @@ sellers → geolocation       via seller_zip_code_prefix
 - To reproduce: download from the Kaggle URL above, unzip into data/raw/
 
 ## Known Issues or Caveats
-
-
-
+- To be updated after initial data exploration.
