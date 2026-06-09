@@ -1,4 +1,13 @@
-DROP TABLE IF EXISTS category_name_translation, order_reviews, order_payment, order_items, orders, products, sellers, customers, geolocation;
+DROP TABLE IF EXISTS
+    category_name_translation,
+    order_reviews,
+    order_payment,
+    order_items,
+    orders,
+    products,
+    sellers,
+    customers,
+    geolocation;
 
 CREATE TABLE geolocation (
     id SERIAL,
@@ -22,14 +31,14 @@ CREATE TABLE customers (
 CREATE TABLE sellers (
     seller_id VARCHAR(40) NOT NULL,
     seller_zip_code_prefix VARCHAR(10),
-    seller_city VARCHAR(20),
+    seller_city VARCHAR(40),
     seller_state VARCHAR(5),
     PRIMARY KEY (seller_id)
 );
 
 CREATE TABLE products (
     product_id VARCHAR(40) NOT NULL,
-    product_category_name VARCHAR(40),
+    product_category_name VARCHAR(50),
     product_name_lenght INT,
     product_description_lenght INT,
     product_photos_qty INT,
@@ -82,7 +91,7 @@ CREATE TABLE order_reviews (
     order_id VARCHAR(40) NOT NULL,
     review_score INT,
     review_comment_title VARCHAR(100),
-    review_comment_message VARCHAR,
+    review_comment_message VARCHAR(250),
     review_creation_date TIMESTAMP,
     review_answer_timestamp TIMESTAMP,
     PRIMARY KEY (review_id, order_id),
@@ -90,6 +99,6 @@ CREATE TABLE order_reviews (
 );
 
 CREATE TABLE category_name_translation (
-    product_category_name VARCHAR(40),
+    product_category_name VARCHAR(50),
     product_category_name_english VARCHAR(50)
 );
