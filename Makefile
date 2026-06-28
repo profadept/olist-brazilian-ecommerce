@@ -39,3 +39,6 @@ run-db-schema: ## Drop and restart the database schema
 
 help: ## Show this help message
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-15s %s\n", $$1, $$2}'
+
+analysis: ## Run the analysis queries
+	psql -h localhost -p 5433 -U olist -d olist_ecommerce -f sql/02_analysis.sql
