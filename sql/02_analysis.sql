@@ -34,3 +34,36 @@ GROUP BY
 HAVING COUNT(*) >= 10
 ORDER BY delay_days_avg DESC
 LIMIT 10;
+
+-- Question 3: Does review score correlate with delivery time?
+SELECT
+    order_reviews.review_score,
+    ROUND(AVG(orders.order_delivered_customer_date::DATE - orders.order_approved_at::DATE), 1) AS avg_delivery_days
+FROM
+    orders
+INNER JOIN
+    order_reviews
+        ON orders.order_id = order_reviews.order_id
+WHERE
+    orders.order_status = 'delivered'
+GROUP BY
+    order_reviews.review_score
+ORDER BY
+    avg_delivery_days DESC;
+
+-- Question 4: Where are high-value customers concentrated geographically?
+SELECT
+    customers.customer_state,
+    SUM(order_payment.payment_value)  AS total_state_value
+FROM
+    orders
+INNER JOIN
+    order_payment
+        ON order_payment.order_id = orders.order_id
+INNER JOIN
+    customers
+        ON orders.customer_id = customers.customer_id
+GROUP BY
+    customers.customer_state
+ORDER BY 
+    total_state_value DESC;
